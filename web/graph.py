@@ -10,7 +10,7 @@ def cdist_min_n(XA, XB, topn, metric='euclidean', *args, **kwargs):
     """Take n elements from XB nearest to XA"""
     try:
         if not isinstance(XA, np.ndarray):
-            XA = np.asarray(XA).reshape(1,-1)
+            XA = np.asarray(XA).reshape(1, -1)
         if not isinstance(XB, np.ndarray):
             XB = np.asarray(XB)
         n = min(topn, XB.shape[0])
@@ -39,13 +39,16 @@ class Graph():
     _lemma = MLemma(language='ru')
 
     def __init__(self, *name):
-        self.node_labels = {}
-        self.node_index = {}
         self.g = GVector()  # .from_pickle()
         self.load(*name)
 
+        self.node_index = {}
+        self.node_labels = {}
         self.node_vectors = []
         self.get_node_vectors()
+
+        self.vocab_pure = {}
+        pass
 
     def load(self, name):
         self.graph = nx.read_graphml(name)
@@ -83,6 +86,12 @@ class Graph():
 
         return self.node_labels
 
+    def children(self, node):
+        return self.graph.succ[node]
+
+    def parents(self, node):
+        return self.graph.pred[node]
+
     def prepare_string(self, s, remove_punctuation=False, lower=True):
         if remove_punctuation:
             s = re.sub(r'[–!"#$%&\'()*+,./:;<=>?@\[\\\]^_`{|}~«»]+', ' ', s)
@@ -114,6 +123,7 @@ class Graph():
 
     def tokenize(self, text, **options):
         '''Return list for list, str - otherwise'''
+        ret = []
         try:
             if 'lower' in options and options['lower']:
                 text = text.lower()
@@ -122,9 +132,6 @@ class Graph():
                 text = re.sub(options['not_separator'], chr(2), text)
             ret = re.split(r'[ !"#$%&\'()*+,-./:;<=>?@\[\\\]_`{|}~^]', text)
             ret = [x for x in ret if len(x) > 0]
-            if 'remove_punctuation' in options and options['remove_punctuation']:
-                ret = re.sub(r'[–!"#$%&\'()*+,./:;<=>?@\[\\\]^_`{|}~«»]+', ' ', ret)
-                ret = re.sub(r'\d+', ' ', ret)
             if 'not_separator' in options:
                 ret = [re.sub(chr(2), options['not_separator'], x) for x in ret]
             if 'normalize' in options and options['normalize']:
@@ -145,7 +152,7 @@ class GVector:
             if filenames is not None:
                 self.read_me(filenames, binary, encoding=encoding, zipped=zipped, limit=limit)
         except Exception as e:
-            print(e)
+            pass
 
     def get_index_pure(self, word):
         try:
@@ -223,7 +230,7 @@ if __name__ == '__main__':
         g = Graph('Polytech_total.graphml')
 
         sim = g.similar('физика')
-        print('sim', sim)
+
         pass
     except Exception as e:
         print(e)
