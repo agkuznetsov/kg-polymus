@@ -39,12 +39,13 @@ class Graph():
     _lemma = MLemma(language='ru')
 
     def __init__(self, *name):
+        self.node_labels = {}
+        self.node_index = {}
         self.g = GVector()  # .from_pickle()
         self.load(*name)
 
         self.node_vectors = []
         self.get_node_vectors()
-        pass
 
     def load(self, name):
         self.graph = nx.read_graphml(name)
@@ -67,8 +68,6 @@ class Graph():
             return 0
 
     def get_node_vectors(self, node=None):
-        self.node_index = {}
-        self.node_labels = {}
         for i, (node, prop) in enumerate(self.graph.nodes.items()):
             self.node_index.update({i: node})
             try:
@@ -146,7 +145,7 @@ class GVector:
             if filenames is not None:
                 self.read_me(filenames, binary, encoding=encoding, zipped=zipped, limit=limit)
         except Exception as e:
-            pass
+            print(e)
 
     def get_index_pure(self, word):
         try:
@@ -224,7 +223,7 @@ if __name__ == '__main__':
         g = Graph('Polytech_total.graphml')
 
         sim = g.similar('физика')
-
+        print('sim', sim)
         pass
     except Exception as e:
         print(e)
