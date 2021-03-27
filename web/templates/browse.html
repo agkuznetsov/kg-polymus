@@ -29,11 +29,11 @@
 }
 
 #module a.collapsed:after  {
-    content: '+ Show More';
+    content: '+ Читать дальше';
 }
 
 #module a:not(.collapsed):after {
-    content: '- Show Less';
+    content: '- Скрыть подробности';
 }
 
 
@@ -85,7 +85,7 @@
   .carousel-inner .active.right { left: 50%; }
 	.carousel-inner .next        { left:  50%; }
 	.carousel-inner .prev		     { left: -50%; }
-  .carousel-col                { width: 50%; }
+	.carousel-col                { width: 50%; }
 	.active > div:first-child + div { display:block; }
 }
 
@@ -117,16 +117,17 @@
 	height: 230px;
 }
 
-.red {background: red;}
+.red {background: lightpink;}
 
-.blue {background: blue;}
+.blue {background: lightblue;}
 
-.green {background: green;}
+.green {background: lightgreen;}
 
-.yellow {background: yellow;}
+.yellow {background: lightyellow;}
+
 </style>
-
   </head>
+
   <body>
 <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -138,7 +139,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Brand</a>
+      <a class="navbar-brand" href="#">Политех</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -161,9 +162,9 @@
       </ul>
       <form class="navbar-form navbar-left">
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
+          <input type="text" class="form-control" placeholder="Запрос поиска" name="search">
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-default">Найти</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Link</a></li>
@@ -182,36 +183,31 @@
   </div><!-- /.container-fluid -->
 </nav>
 
-
-
-
 Предки
-<div>
-
 <div class="container">
 	<div class="row">
 		<div class="col-xs-11 col-md-10 col-centered">
 
-			<div id="carousel" class="carousel slide" data-ride="carousel" data-type="multi" data-interval="2500">
+			<div id="carousel" class="carousel slide" data-ride="carousel" data-type="multi" data-interval="4096">
 				<div class="carousel-inner">
 					<div class="item active">
 						<div class="carousel-col">
-							<div class="block red img-responsive"></div>
+							<div class="block red img-responsive">Предок 1</div>
 						</div>
 					</div>
 					<div class="item">
 						<div class="carousel-col">
-							<div class="block green img-responsive"></div>
+							<div class="block green img-responsive">Предок 2</div>
 						</div>
 					</div>
 					<div class="item">
 						<div class="carousel-col">
-							<div class="block blue img-responsive"></div>
+							<div class="block blue img-responsive">Предок 3</div>
 						</div>
 					</div>
 					<div class="item">
 						<div class="carousel-col">
-							<div class="block yellow img-responsive"></div>
+							<div class="block yellow img-responsive">Предок 4</div>
 						</div>
 					</div>
 				</div>
@@ -236,11 +232,8 @@
 </div>
 
 
-</div>
-
-Текст статьи
 <div id="module" class="container">
-<h3>Bacon Ipsum</h3>
+<h3>Текст статьи</h3>
 <p class="collapse" id="collapseExample" aria-expanded="false">
     Bacon ipsum dolor amet doner picanha tri-tip biltong leberkas salami meatball tongue filet mignon landjaeger tail. Kielbasa salami tenderloin picanha spare ribs, beef ribs strip steak jerky cow. Pork chop chicken ham hock beef ribs turkey jerky. Shoulder beef capicola doner, tongue tail sausage short ribs andouille. Rump frankfurter landjaeger t-bone, kielbasa doner ham hock shankle venison. Cupim capicola kielbasa t-bone, ball tip chicken andouille venison pork chop doner bacon beef ribs kevin shankle. Short loin leberkas tenderloin ground round shank, brisket strip steak ham hock ham.
 </p>
@@ -254,26 +247,34 @@
 	<div class="row">
 		<div class="col-xs-11 col-md-10 col-centered">
 
-			<div id="carousel" class="carousel slide" data-ride="carousel" data-type="multi" data-interval="2500">
+			<div id="carousel" class="carousel slide" data-ride="carousel" data-type="multi" data-interval="5000">
 				<div class="carousel-inner">
 					<div class="item active">
 						<div class="carousel-col">
-							<div class="block red img-responsive"></div>
+							<div class="block red img-responsive">
+								Потомок 1
+							</div>
 						</div>
 					</div>
 					<div class="item">
 						<div class="carousel-col">
-							<div class="block green img-responsive"></div>
+							<div class="block green img-responsive">
+								Потомок 2
+							</div>
 						</div>
 					</div>
 					<div class="item">
 						<div class="carousel-col">
-							<div class="block blue img-responsive"></div>
+							<div class="block blue img-responsive">
+								Потомок 3
+							</div>
 						</div>
 					</div>
 					<div class="item">
 						<div class="carousel-col">
-							<div class="block yellow img-responsive"></div>
+							<div class="block yellow img-responsive">
+								Потомок 4
+							</div>
 						</div>
 					</div>
 				</div>
@@ -296,14 +297,6 @@
 		</div>
 	</div>
 </div>
-
-
-
-            </div>
-        </div>
-    </div>
-</div>
-
 
 <script>
 $('.carousel[data-type="multi"] .item').each(function() {
