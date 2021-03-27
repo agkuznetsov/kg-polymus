@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <title>Навигация</title>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+<style>
+#module {
+  width: 500px;
+}
+
+#module p.collapse[aria-expanded="false"] {
+    display: block;
+    height: 40px !important;
+    overflow: hidden;
+}
+
+#module p.collapsing[aria-expanded="false"] {
+    height: 40px !important;
+}
+
+#module a.collapsed:after  {
+    content: '+ Show More';
+}
+
+#module a:not(.collapsed):after {
+    content: '- Show Less';
+}
+
+
+
+.col-centered {
+    float: none;
+    margin: 0 auto;
+}
+
+.carousel-control {
+    width: 8%;
+    width: 0px;
+}
+.carousel-control.left,
+.carousel-control.right {
+    margin-right: 40px;
+    margin-left: 32px;
+    background-image: none;
+    opacity: 1;
+}
+.carousel-control > a > span {
+    color: white;
+	  font-size: 29px !important;
+}
+
+.carousel-col {
+    position: relative;
+    min-height: 1px;
+    padding: 5px;
+    float: left;
+ }
+
+ .active > div { display:none; }
+ .active > div:first-child { display:block; }
+
+/*xs*/
+@media (max-width: 767px) {
+  .carousel-inner .active.left { left: -50%; }
+  .carousel-inner .active.right { left: 50%; }
+	.carousel-inner .next        { left:  50%; }
+	.carousel-inner .prev		     { left: -50%; }
+  .carousel-col                { width: 50%; }
+	.active > div:first-child + div { display:block; }
+}
+
+/*sm*/
+@media (min-width: 768px) and (max-width: 991px) {
+  .carousel-inner .active.left { left: -50%; }
+  .carousel-inner .active.right { left: 50%; }
+	.carousel-inner .next        { left:  50%; }
+	.carousel-inner .prev		     { left: -50%; }
+  .carousel-col                { width: 50%; }
+	.active > div:first-child + div { display:block; }
+}
+
+/*md*/
+@media (min-width: 992px) and (max-width: 1199px) {
+  .carousel-inner .active.left { left: -33%; }
+  .carousel-inner .active.right { left: 33%; }
+	.carousel-inner .next        { left:  33%; }
+	.carousel-inner .prev		     { left: -33%; }
+  .carousel-col                { width: 33%; }
+	.active > div:first-child + div { display:block; }
+  .active > div:first-child + div + div { display:block; }
+}
+
+/*lg*/
+@media (min-width: 1200px) {
+  .carousel-inner .active.left { left: -25%; }
+  .carousel-inner .active.right{ left:  25%; }
+	.carousel-inner .next        { left:  25%; }
+	.carousel-inner .prev		     { left: -25%; }
+  .carousel-col                { width: 25%; }
+	.active > div:first-child + div { display:block; }
+  .active > div:first-child + div + div { display:block; }
+	.active > div:first-child + div + div + div { display:block; }
+}
+
+.block {
+	width: 306px;
+	height: 230px;
+}
+
+.red {background: red;}
+
+.blue {background: blue;}
+
+.green {background: green;}
+
+.yellow {background: yellow;}
+</style>
+
+  </head>
+  <body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Brand</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Link</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">One more separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+      <form class="navbar-form navbar-left">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Link</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+
+
+
+Предки
+<div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-xs-11 col-md-10 col-centered">
+
+			<div id="carousel" class="carousel slide" data-ride="carousel" data-type="multi" data-interval="2500">
+				<div class="carousel-inner">
+					<div class="item active">
+						<div class="carousel-col">
+							<div class="block red img-responsive"></div>
+						</div>
+					</div>
+					<div class="item">
+						<div class="carousel-col">
+							<div class="block green img-responsive"></div>
+						</div>
+					</div>
+					<div class="item">
+						<div class="carousel-col">
+							<div class="block blue img-responsive"></div>
+						</div>
+					</div>
+					<div class="item">
+						<div class="carousel-col">
+							<div class="block yellow img-responsive"></div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Controls -->
+				<div class="left carousel-control">
+					<a href="#carousel" role="button" data-slide="prev">
+						<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+						<span class="sr-only">Previous</span>
+					</a>
+				</div>
+				<div class="right carousel-control">
+					<a href="#carousel" role="button" data-slide="next">
+						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+						<span class="sr-only">Next</span>
+					</a>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+</div>
+
+Текст статьи
+<div id="module" class="container">
+<h3>Bacon Ipsum</h3>
+<p class="collapse" id="collapseExample" aria-expanded="false">
+    Bacon ipsum dolor amet doner picanha tri-tip biltong leberkas salami meatball tongue filet mignon landjaeger tail. Kielbasa salami tenderloin picanha spare ribs, beef ribs strip steak jerky cow. Pork chop chicken ham hock beef ribs turkey jerky. Shoulder beef capicola doner, tongue tail sausage short ribs andouille. Rump frankfurter landjaeger t-bone, kielbasa doner ham hock shankle venison. Cupim capicola kielbasa t-bone, ball tip chicken andouille venison pork chop doner bacon beef ribs kevin shankle. Short loin leberkas tenderloin ground round shank, brisket strip steak ham hock ham.
+</p>
+<a role="button" class="collapsed" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+</a>
+</div>
+
+
+Потомки
+<div class="container">
+	<div class="row">
+		<div class="col-xs-11 col-md-10 col-centered">
+
+			<div id="carousel" class="carousel slide" data-ride="carousel" data-type="multi" data-interval="2500">
+				<div class="carousel-inner">
+					<div class="item active">
+						<div class="carousel-col">
+							<div class="block red img-responsive"></div>
+						</div>
+					</div>
+					<div class="item">
+						<div class="carousel-col">
+							<div class="block green img-responsive"></div>
+						</div>
+					</div>
+					<div class="item">
+						<div class="carousel-col">
+							<div class="block blue img-responsive"></div>
+						</div>
+					</div>
+					<div class="item">
+						<div class="carousel-col">
+							<div class="block yellow img-responsive"></div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Controls -->
+				<div class="left carousel-control">
+					<a href="#carousel" role="button" data-slide="prev">
+						<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+						<span class="sr-only">Previous</span>
+					</a>
+				</div>
+				<div class="right carousel-control">
+					<a href="#carousel" role="button" data-slide="next">
+						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+						<span class="sr-only">Next</span>
+					</a>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+$('.carousel[data-type="multi"] .item').each(function() {
+	var next = $(this).next();
+	if (!next.length) {
+		next = $(this).siblings(':first');
+	}
+	next.children(':first-child').clone().appendTo($(this));
+
+	for (var i = 0; i < 2; i++) {
+		next = next.next();
+		if (!next.length) {
+			next = $(this).siblings(':first');
+		}
+
+		next.children(':first-child').clone().appendTo($(this));
+	}
+});
+
+</script>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
+
+
+	</body>
+
+
+
+</html>
