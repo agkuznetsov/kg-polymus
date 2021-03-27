@@ -32,22 +32,22 @@ def browse():
 
 
 @app.route('/node', methods=['GET'])
-def search():
-    node = request.args.get('node')
+def node():
+    _node = request.args.get('node')
 
     result = dict(
-        node=dict(url=f'browse?node={node}', title=f'Статья про {node}', text='На каждый {node} найдётся анти-{node}'),
+        node=dict(url=f'browse?node={_node}', title=f'Статья про {_node}', text='На каждый {node} найдётся анти-{_node}'),
         parents=[
             dict(
-                url='browse?node={node}_parent_{i}',
-                title='Статья про родителя {node} №{i}',
-                head='Одной из абстракций {node} является следующий узел.')
+                url='browse?node={_node}_parent_{i}',
+                title='Статья про родителя {_node} №{i}',
+                head='Одной из абстракций {_node} является следующий узел.')
             for i in range(10)],
         children=[
             dict(
-                url='browse?node={node}_child_{i}',
-                title='Статья про потомка {node} №{i}',
-                head='Одним из частных случаев {node} является следующий узел.')
+                url='browse?node={_node}_child_{i}',
+                title='Статья про потомка {_node} №{i}',
+                head='Одним из частных случаев {_node} является следующий узел.')
             for i in range(10)]
     )
 
