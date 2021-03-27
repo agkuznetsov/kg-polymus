@@ -102,7 +102,7 @@ h2 {
       </ul>
       <form class="navbar-form navbar-left">
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Запрос поиска" name="query">
+          <input type="text" class="form-control" placeholder="Запрос поиска" name="query" value="{{ search.query }}">
         </div>
         <button type="submit" class="btn btn-default">Найти</button>
       </form>
@@ -129,47 +129,21 @@ h2 {
             <div class="ibox float-e-margins">
                 <div class="ibox-content">
                     <h2>
-                        160 results found for: <span class="text-navy">"Bootdey"</span>
+                        {{ search.results|length }} results found for: <span class="text-navy">"{{ search.query }}"</span>
                     </h2>
-                    <small>Request time  (0.23 seconds)</small>
-
 Результаты
                     <div class="hr-line-dashed"></div>
-                    <div class="search-result">
-                        <h3><a href="#">Bootdey</a></h3>
-                        <a href="#" class="search-link">www.bootdey.com</a>
+                    {% for result in  search.results  %}
+                        <div class="search-result">
+                        <h3><a href="{{ result.url }}">{{ result.title}}</a></h3>
+                            <a href="{{ result.url }}" class="search-link">{{ result.url }}</a>
                         <p>
 
                         </p>
-                    </div>
+                        </div>
 
-                    <div class="hr-line-dashed"></div>
-                    <div class="search-result">
-                        <h3><a href="#">Bootdey</a></h3>
-                        <a href="#" class="search-link">https://bootdey.com/</a>
-                        <p>
-                          Bootdey is a gallery of free snippets resources templates and utilities for bootstrap css hmtl js framework. Codes for developers and web designers
-                        </p>
-                    </div>
-                    <div class="hr-line-dashed"></div>
-
-                    <div class="search-result">
-                        <h3><a href="#">Bootdey | Facebook</a></h3>
-                        <a href="#" class="search-link">https://www.facebook.com/bootdey</a>
-                        <p>
-                           Bootdey is a gallery of free snippets resources templates and utilities for bootstrap css hmtl js framework. Codes for developers and web designers
-                        </p>
-                    </div>
-                    <div class="hr-line-dashed"></div>
-
-                    <div class="search-result">
-                        <h3><a href="#">Bootdey | Twitter</a></h3>
-                        <a href="#" class="search-link">www.twitter.com/bootdey</a>
-                        <p>
-                            Bootdey is a gallery of free snippets resources templates and utilities for bootstrap css hmtl js framework. Codes for developers and web designers
-                        </p>
-                    </div>
-                    <div class="hr-line-dashed"></div>
+                        <div class="hr-line-dashed"></div>
+                    {% endfor %}
 
                     <div class="text-center">
                         <div class="btn-group">
