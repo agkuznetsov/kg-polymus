@@ -315,6 +315,15 @@ $('.carousel[data-type="multi"] .item').each(function() {
 		next.children(':first-child').clone().appendTo($(this));
 	}
 });
+</script>
+
+<script>
+
+$(function() {
+	$.get("/node?node={{ node }}", function(node) {
+		console.log(node);
+	});
+});
 
 </script>
 
