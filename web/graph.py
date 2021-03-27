@@ -22,13 +22,6 @@ def cdist_min_n(XA, XB, topn, metric='euclidean', *args, **kwargs):
         return str(e)
 
 
-def path(*elem, expanduser=False, initial_path='e:\\'):
-    if expanduser:
-        return os.path.expanduser(os.path.join('~', *elem))
-    else:
-        return os.path.join(initial_path, *elem)
-
-
 class MLemma:
     _pos_translator = {'ADJF': 'ADJ', 'ADJS': 'ADJ',
                        'ADVB': 'ADV', 'GRND': 'GRND',
@@ -46,14 +39,16 @@ class MLemma:
 class Graph():
     _lemma = MLemma(language='ru')
 
-    def __init__(self):
+    def __init__(self, *name):
         self.g = GVector()  # .from_pickle()
+        self.load(*name)
+
         self.node_vectors = []
+        self.get_node_vectors()
         pass
 
-    def load(self, *name):
-        self.graph = nx.read_graphml(path(*name))
-        # self.graph = nx.read_graphml(path('data', 'graph', 'Polytech_graphs', *name))
+    def load(self, name):
+        self.graph = nx.read_graphml(name)
 
     def get_edge_labels(self, node=None):
         labels = {}
@@ -83,7 +78,7 @@ class Graph():
                 self.node_labels.update({node: label})
                 label = self.prepare_string(label, remove_punctuation=True, lower=True)
                 label = self.tokenize(label, normalize=True)
-                self.node_vectors.append(self.g.vector(label, normalize=True))
+                self.node_vectors.append(self.g.vector(label))
                 # self.node_vectors.append(self.predict(label))
             except Exception as e:
                 self.node_labels.update({node: ''})
@@ -143,7 +138,6 @@ class Graph():
 
 
 class GVector:
-    # _folder = path('model', 'nlp')
     _lemma = MLemma()
 
     def __init__(self, filenames='tayga_upos_skipgram_300_2_2019.txt',
@@ -155,9 +149,9 @@ class GVector:
         except Exception as e:
             pass
 
-    def get_index_pure(self, word):  # , with_0_for_unknown=True):
+    def get_index_pure(self, word):
         try:
-            return self.vocab_pure[word]  #+ int(with_0_for_unknown)
+            return self.vocab_pure[word]
         except:
             return 0
 
@@ -228,14 +222,7 @@ class GVector:
 
 if __name__ == '__main__':
     try:
-        g = Graph()
-        g.load('Polytech_total.graphml')
-
-        # nx.draw(g.graph)
-        # plt.show()
-
-        res_n = g.get_node_vectors()
-        # res_e = g.get_edge_labels()
+        g = Graph('Polytech_total.graphml')
 
         sim = g.similar('физика')
 
