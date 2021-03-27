@@ -13,7 +13,8 @@ def search():
     search = dict(
         query=query,
         results = [
-            dict(url='/python', title='My large python')
+            dict(url='browse?node=python', title='My large python'),
+            dict(url='browse?node=groovy', title='My groovy groovy'),
         ]
     )
 
@@ -23,9 +24,11 @@ def search():
     return render_template('search.html', search=search)
 
 
-@app.route('/browse')
+@app.route('/browse', methods=['GET'])
 def browse():
-    return render_template('browse.html')
+    node = request.args.get('node')
+
+    return render_template('browse.html', node=node)
 
 
 @app.route('/')
