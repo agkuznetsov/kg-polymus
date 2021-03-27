@@ -51,10 +51,7 @@ def search():
             for i in range(10)]
     )
 
-    if query is not None:
-        pass
-
-    return render_template('search.html', search=search)
+    return result
 
 
 
