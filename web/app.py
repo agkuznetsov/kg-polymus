@@ -38,7 +38,12 @@ def node():
     _node = request.args.get('node')
 
     result = dict(
-        node=dict(url=f'browse?node={_node}', title=f'Статья про {_node}', text=f'На каждый {_node} найдётся анти-{_node}'),
+        node=dict(url=f'browse?node={_node}', title=f'Статья про {_node}', text=f"""
+        На каждый {_node} найдётся анти-{_node}
+        <br/>
+        Python can be easy to pick up whether you're a first time programmer or you're experienced with other languages.
+        The following pages are a useful first step to get on your way writing programs with Python!
+        """),
         parents=[
             dict(
                 url=f'browse?node={_node}_parent_{i}',
@@ -53,8 +58,11 @@ def node():
             for i in range(10)]
     )
 
-    return json.dumps(result, ensure_ascii=False, indent=4)
-
+    response = app.response_class(
+        response=json.dumps(result, ensure_ascii=False, indent=4),
+        mimetype='application/json'
+    )
+    return response
 
 
 @app.route('/')

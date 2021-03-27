@@ -189,7 +189,7 @@
 		<div class="col-xs-11 col-md-10 col-centered">
 
 			<div id="carousel" class="carousel slide" data-ride="carousel" data-type="multi" data-interval="4096">
-				<div class="carousel-inner">
+				<div id="node_parents" class="carousel-inner">
 					<div class="item active">
 						<div class="carousel-col">
 							<div class="block red img-responsive">Предок 1</div>
@@ -233,11 +233,11 @@
 
 
 <div id="module" class="container">
-<h3>Текст статьи  {{ node }}</h3>
-<p class="collapse" id="collapseExample" aria-expanded="false">
+<h3 id="node_title">Текст статьи  {{ node }}</h3>
+<p class="collapse" id="node_text" aria-expanded="false">
     Bacon ipsum dolor amet doner picanha tri-tip biltong leberkas salami meatball tongue filet mignon landjaeger tail. Kielbasa salami tenderloin picanha spare ribs, beef ribs strip steak jerky cow. Pork chop chicken ham hock beef ribs turkey jerky. Shoulder beef capicola doner, tongue tail sausage short ribs andouille. Rump frankfurter landjaeger t-bone, kielbasa doner ham hock shankle venison. Cupim capicola kielbasa t-bone, ball tip chicken andouille venison pork chop doner bacon beef ribs kevin shankle. Short loin leberkas tenderloin ground round shank, brisket strip steak ham hock ham.
 </p>
-<a role="button" class="collapsed" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+<a role="button" class="collapsed" data-toggle="collapse" href="#node_text" aria-expanded="false" aria-controls="node_text">
 </a>
 </div>
 
@@ -248,7 +248,7 @@
 		<div class="col-xs-11 col-md-10 col-centered">
 
 			<div id="carousel" class="carousel slide" data-ride="carousel" data-type="multi" data-interval="5000">
-				<div class="carousel-inner">
+				<div class="carousel-inner" id="node_children">
 					<div class="item active">
 						<div class="carousel-col">
 							<div class="block red img-responsive">
@@ -299,29 +299,60 @@
 </div>
 
 <script>
-$('.carousel[data-type="multi"] .item').each(function() {
-	var next = $(this).next();
-	if (!next.length) {
-		next = $(this).siblings(':first');
-	}
-	next.children(':first-child').clone().appendTo($(this));
 
-	for (var i = 0; i < 2; i++) {
-		next = next.next();
+function update_carousel() {
+	$('.carousel[data-type="multi"] .item').each(function() {
+		var next = $(this).next();
 		if (!next.length) {
 			next = $(this).siblings(':first');
 		}
-
 		next.children(':first-child').clone().appendTo($(this));
-	}
-});
+
+		for (var i = 0; i < 2; i++) {
+			next = next.next();
+			if (!next.length) {
+				next = $(this).siblings(':first');
+			}
+
+			next.children(':first-child').clone().appendTo($(this));
+		}
+	});
+}
+
+update_carousel();
 </script>
 
 <script>
 
 $(function() {
-	$.get("/node?node={{ node }}", function(node) {
-		console.log(node);
+	$.get("/node?node={{ node }}", function(result) {
+		$('#node_title').html(result.node.title);
+		$('#node_text').html(result.node.text);
+		$('#node_parents').find('.item').each(function (i, item) {
+			var N = $(this).find('div > div').length;
+			$(this).find('div > div').each(function (j, item_inner) {
+				k = (i + j) % N;
+				if (k < result.parents.length) {
+					$(item_inner).html('<h4>' + result.parents[k].title + '</h4><br/>' + result.parents[k].head);
+					$(item_inner).click(function () {
+						window.location.href = result.parents[k].url;
+					});
+				}
+			});
+		});
+		$('#node_children').find('.item').each(function (i, item) {
+			var N = $(this).find('div > div').length;
+			$(this).find('div > div').each(function (j, item_inner) {
+				k = (i + j) % N;
+				if (k < result.children.length) {
+					$(item_inner).html('<h4>' + result.children[k].title + '</h4><br/>' + result.children[k].head);
+					$(item_inner).click(function () {
+						window.location.href = result.children[k].url;
+					});
+				}
+			});
+		});
+
 	});
 });
 
@@ -333,10 +364,5 @@ $(function() {
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 
-
-
 	</body>
-
-
-
 </html>
