@@ -64,14 +64,14 @@ def node():
                 url=f'browse?node={parent}',
                 title=f'{g.node_labels[parent]}',
                 head=f'{g.node_labels[parent]}')
-            for parent in parents
+            for parent in parents if parent in g.node_labels
         ],
         children=[
             dict(
                 url=f'browse?node={child}',
                 title=f'{g.node_labels[child]}',
                 head=f'{g.node_labels[child]}')
-            for child in children]
+            for child in children if child in g.node_labels]
     )
 
     response = app.response_class(
