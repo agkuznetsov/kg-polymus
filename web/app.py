@@ -52,13 +52,23 @@ def node():
     print(children)
     print(parents)
 
-    result = dict(
-        node=dict(url=f'browse?node={_node}', title=f'Статья про {title}', text=f"""
+    template_text = f"""
         На каждый {title} найдётся анти-{title}
         <br/>
         Python can be easy to pick up whether you're a first time programmer or you're experienced with other languages.
         The following pages are a useful first step to get on your way writing programs with Python!
-        """),
+        """
+
+    node_data = template_text
+    try:
+        with open(f'data/{_node}', 'r', encoding='utf-8') as f:
+            node_data = f.read()
+    except Exception as exc:
+        print(exc)
+        pass
+
+    result = dict(
+        node=dict(url=f'browse?node={_node}', title=f'Статья про {title}', text=node_data),
         parents=[
             dict(
                 url=f'browse?node={parent}',
