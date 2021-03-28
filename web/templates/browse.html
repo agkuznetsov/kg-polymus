@@ -15,7 +15,7 @@
 
 <style>
 #module {
-  width: 500px;
+  width: 1000px;
 }
 
 #module p.collapse[aria-expanded="false"] {
@@ -117,13 +117,11 @@
 	height: 230px;
 }
 
-.red {background: lightpink;}
 
-.blue {background: lightblue;}
-
-.green {background: lightgreen;}
-
-.yellow {background: lightyellow;}
+.color1 {background: lightred;}
+.color2 {background: lightblue;}
+.color3 {background: lightgreen;}
+.color4 {background: lightyellow;}
 
 </style>
   </head>
@@ -145,20 +143,6 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
-        </li>
       </ul>
       <form class="navbar-form navbar-left" action="search">
         <div class="form-group">
@@ -167,17 +151,6 @@
         <button type="submit" class="btn btn-default">Найти</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-          </ul>
-        </li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -192,22 +165,22 @@
 				<div id="node_parents" class="carousel-inner">
 					<div class="item active">
 						<div class="carousel-col">
-							<div class="block red img-responsive">Предок 1</div>
+							<div class="block color1 img-responsive">Предок 1</div>
 						</div>
 					</div>
 					<div class="item">
 						<div class="carousel-col">
-							<div class="block green img-responsive">Предок 2</div>
+							<div class="block color3 img-responsive">Предок 2</div>
 						</div>
 					</div>
 					<div class="item">
 						<div class="carousel-col">
-							<div class="block blue img-responsive">Предок 3</div>
+							<div class="block color2 img-responsive">Предок 3</div>
 						</div>
 					</div>
 					<div class="item">
 						<div class="carousel-col">
-							<div class="block yellow img-responsive">Предок 4</div>
+							<div class="block color4 img-responsive">Предок 4</div>
 						</div>
 					</div>
 				</div>
@@ -251,28 +224,28 @@
 				<div class="carousel-inner" id="node_children">
 					<div class="item active">
 						<div class="carousel-col">
-							<div class="block red img-responsive">
+							<div class="block color3 img-responsive">
 								Потомок 1
 							</div>
 						</div>
 					</div>
 					<div class="item">
 						<div class="carousel-col">
-							<div class="block green img-responsive">
+							<div class="block color2 img-responsive">
 								Потомок 2
 							</div>
 						</div>
 					</div>
 					<div class="item">
 						<div class="carousel-col">
-							<div class="block blue img-responsive">
+							<div class="block color4 img-responsive">
 								Потомок 3
 							</div>
 						</div>
 					</div>
 					<div class="item">
 						<div class="carousel-col">
-							<div class="block yellow img-responsive">
+							<div class="block color1 img-responsive">
 								Потомок 4
 							</div>
 						</div>
