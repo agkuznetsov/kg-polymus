@@ -4,24 +4,31 @@ from web import api
 
 import json
 
+from web.graph import Graph
+
 app = Flask(__name__)
 app.register_blueprint(api.bp)
+
+g = Graph('Polytech_total.graphml')
 
 
 @app.route('/search', methods=['GET'])
 def search():
     query = request.args.get('query')
 
-    search = dict(
-        query=query,
-        results = [
-            dict(url='browse?node=python', title='My large python'),
-            dict(url='browse?node=groovy', title='My groovy groovy'),
-        ]
-    )
+    search = dict()
 
     if query is not None:
-        pass
+        g_results = g.similar(query)
+        search = dict(
+            query=query,
+            results=[
+                # dict(url='browse?node=python', title='My large python'),
+                # dict(url='browse?node=groovy', title='My groovy groovy'),
+                dict(url=f'browse?node={node}', title=title)
+                for node, title, score in g_results
+            ]
+        )
 
     return render_template('search.html', search=search)
 
@@ -36,6 +43,10 @@ def browse():
 @app.route('/node', methods=['GET'])
 def node():
     _node = request.args.get('node')
+
+    # title = g.node_labels[_node]
+    # childrens = g.children(_node)
+    # parents = g.parents(_node)
 
     result = dict(
         node=dict(url=f'browse?node={_node}', title=f'Статья про {_node}', text=f"""
