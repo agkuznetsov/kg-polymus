@@ -47,9 +47,6 @@ class Graph():
         self.node_vectors = []
         self.get_node_vectors()
 
-        self.vocab_pure = {}
-        pass
-
     def load(self, name):
         self.graph = nx.read_graphml(name)
 
@@ -60,15 +57,9 @@ class Graph():
                 try:
                     labels.update({(n, x): g.graph[n][x]['label']})
                 except Exception as e:
-                    pass
+                    print(e)
 
         return labels
-
-    def get_index_pure(self, word):
-        try:
-            return self.vocab_pure[word]
-        except:
-            return 0
 
     def get_node_vectors(self, node=None):
         for i, (node, prop) in enumerate(self.graph.nodes.items()):
@@ -149,10 +140,12 @@ class GVector:
                  binary=False, encoding='utf-8', zipped=False,
                  load=None, limit=None):
         try:
+            self.vocab_pure = {}
             if filenames is not None:
                 self.read_me(filenames, binary, encoding=encoding, zipped=zipped, limit=limit)
+
         except Exception as e:
-            pass
+            print(e)
 
     def get_index_pure(self, word):
         try:
@@ -175,12 +168,10 @@ class GVector:
                       encoding=None if binary else encoding) as f:
                 vector_num, vector_size = map(int, f.readline().split())
                 vectors = np.ndarray((vector_num if limit is None else min(vector_num, limit), vector_size), dtype=float)
-                vocab = {}
                 vocab_pure = {}
                 read = 0
                 for line in f:
                     tokens = line.rstrip().split()
-                    vocab.update({tokens[0]:index})
                     vocab_pure.update({tokens[0].split('_')[0]:index})
                     vectors[read] = np.asarray(list(map(float, tokens[1:])))
                     index += 1
@@ -189,11 +180,9 @@ class GVector:
                         break
             if not hasattr(self, 'vectors'):
                 self.vectors = np.concatenate((np.zeros((1, vector_size)), vectors))
-                self.vocab = vocab
                 self.vocab_pure = vocab_pure
             else:
                 self.vectors = np.concatenate((self.vectors, vectors))
-                self.vocab.update(vocab)
                 self.vocab_pure.update(vocab_pure)
         return self
 
@@ -214,7 +203,7 @@ class GVector:
                     if vec is not None:
                         vv.append(vec if weights is None else vec * weights[i])
                 except Exception as e:
-                    pass
+                    print(e)
         n = len(vv)
         if n == 1:
             v = vv[0]
