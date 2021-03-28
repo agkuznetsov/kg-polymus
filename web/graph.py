@@ -141,6 +141,7 @@ class GVector:
                  load=None, limit=None):
         try:
             self.vocab_pure = {}
+            # self.vectors = {}
             if filenames is not None:
                 self.read_me(filenames, binary, encoding=encoding, zipped=zipped, limit=limit)
 
@@ -203,7 +204,8 @@ class GVector:
                     if vec is not None:
                         vv.append(vec if weights is None else vec * weights[i])
                 except Exception as e:
-                    print(e)
+                    # print(e)
+                    pass
         n = len(vv)
         if n == 1:
             v = vv[0]
