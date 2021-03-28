@@ -44,29 +44,34 @@ def browse():
 def node():
     _node = request.args.get('node')
 
-    # title = g.node_labels[_node]
-    # childrens = g.children(_node)
-    # parents = g.parents(_node)
+    title = g.node_labels[_node]
+    children = g.children(_node)
+    parents = g.parents(_node)
+
+    print(title)
+    print(children)
+    print(parents)
 
     result = dict(
-        node=dict(url=f'browse?node={_node}', title=f'Статья про {_node}', text=f"""
-        На каждый {_node} найдётся анти-{_node}
+        node=dict(url=f'browse?node={_node}', title=f'Статья про {title}', text=f"""
+        На каждый {title} найдётся анти-{title}
         <br/>
         Python can be easy to pick up whether you're a first time programmer or you're experienced with other languages.
         The following pages are a useful first step to get on your way writing programs with Python!
         """),
         parents=[
             dict(
-                url=f'browse?node={_node}_parent_{i}',
-                title=f'Статья про родителя {_node} №{i}',
-                head=f'Одной из абстракций {_node} является следующий узел.')
-            for i in range(10)],
+                url=f'browse?node={parent}',
+                title=f'{g.node_labels[parent]}',
+                head=f'{g.node_labels[parent]}')
+            for parent in parents
+        ],
         children=[
             dict(
-                url=f'browse?node={_node}_child_{i}',
-                title=f'Статья про потомка {_node} №{i}',
-                head=f'Одним из частных случаев {_node} является следующий узел.')
-            for i in range(10)]
+                url=f'browse?node={child}',
+                title=f'{g.node_labels[child]}',
+                head=f'{g.node_labels[child]}')
+            for child in children]
     )
 
     response = app.response_class(
